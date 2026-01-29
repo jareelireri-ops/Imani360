@@ -167,6 +167,12 @@ const HomeScreen = () => {
                 borderRadius: '20px',
                 padding: 'clamp(8px, 2vw, 12px)',
               }}
+               onClick={() => {
+  if (card.text.includes('CHURCH NOTICES')) navigate('/notices');
+  if (card.text.includes('EVENTS')) navigate('/events');
+  if (card.text.includes('PRAYERS')) navigate('/prayers');
+  if (card.text.includes('GIVING')) navigate('/giving');
+              }}
             >
               <div className="mb-2 text-[clamp(22px, 6vw, 28px)] group-hover:animate-bounce">{card.icon}</div>
               <div 
