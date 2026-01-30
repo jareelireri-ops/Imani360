@@ -89,9 +89,9 @@ const HomeScreen = () => {
             style={{
               width: 'clamp(110px, 20vw, 140px)',
               height: 'clamp(110px, 20vw, 140px)',
-              background: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%)', // Rich red gradient
+              background: 'linear-gradient(135deg, #311ab6 0%, #2616b8 50%, #fc3b0bde 100%)', // Rich red gradient
               border: '2px solid rgba(255, 255, 255, 0.3)',
-              boxShadow: '0 12px 24px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.1), 0 0 20px rgba(220, 38, 38, 0.5)',
+              boxShadow: '0 12px 24px rgba(0, 0, 0, 0.4), 0_0_20px_ rgba(220, 38, 38, 0.5), 0 0 20px rgba(220, 38, 38, 0.5)',
               borderRadius: '50%',
               marginRight: '60px',
             }}
@@ -111,13 +111,10 @@ const HomeScreen = () => {
             style={{
               width: '6px',
               height: 'clamp(110px, 20vw, 140px)',
-              background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 215, 0, 0.6) 50%, rgba(255, 255, 255, 0.8) 100%)',
-              boxShadow: `
-                0 0 20px rgba(255, 255, 255, 0.8),
-                0 0 40px rgba(255, 215, 0, 0.8),
-                inset 0 0 10px rgba(255, 255, 255, 0.5)
-              `,
-              borderRadius: '3px',
+              background: 'bg-gradient-to-br from-red-600 to-red-800shadow-xlborder border-white/30rounded-full',
+
+              boxShadow: `0 12px 24px rgba(0, 0, 0, 0.4),0_0_20px_ rgba(220, 38, 38, 0.5), 0 0 20px rgba(220, 38, 38, 0.5) `,
+              borderRadius: '50px',
               animation: 'pulse 3s ease-in-out infinite',
             }}
           />
@@ -128,7 +125,7 @@ const HomeScreen = () => {
             style={{
               width: 'clamp(110px, 20vw, 140px)',
               height: 'clamp(110px, 20vw, 140px)',
-              background: 'bg-gradient-to-br from-red-600 to-red-800 shadow-xl border border-white/30 rounded-full',
+              background: 'linear-gradient(135deg, #311ab6 0%, #2616b8 50%, #fc3b0bde 100%)', 
               border: '2px solid rgba(255, 255, 255, 0.3)',
               boxShadow: '0 12px 24px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.1), 0 0 20px rgba(220, 38, 38, 0.5)',
               borderRadius: '50%',
