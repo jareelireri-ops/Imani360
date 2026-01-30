@@ -114,7 +114,7 @@ const HomeScreen = () => {
               background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 215, 0, 0.6) 50%, rgba(255, 255, 255, 0.8) 100%)',
               boxShadow: `
                 0 0 20px rgba(255, 255, 255, 0.8),
-                0 0 40px rgba(255, 215, 0, 0.6),
+                0 0 40px rgba(255, 215, 0, 0.8),
                 inset 0 0 10px rgba(255, 255, 255, 0.5)
               `,
               borderRadius: '3px',
