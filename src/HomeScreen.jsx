@@ -21,7 +21,7 @@ const HomeScreen = () => {
             boxSizing: 'border-box',
             height: '80px',
             background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%)', // Professional blue gradient
-            border: '2px solid rgba(255, 255, 255, 0.2)',
+            border: '2px solid rgba(119, 47, 47, 0.2)',
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.1)',
             borderRadius: '12px',
             display: 'flex',
@@ -128,7 +128,7 @@ const HomeScreen = () => {
             style={{
               width: 'clamp(110px, 20vw, 140px)',
               height: 'clamp(110px, 20vw, 140px)',
-              background: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%)', // Matching red gradient
+              background: 'bg-gradient-to-br from-red-600 to-red-800 shadow-xl border border-white/30 rounded-full',
               border: '2px solid rgba(255, 255, 255, 0.3)',
               boxShadow: '0 12px 24px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.1), 0 0 20px rgba(220, 38, 38, 0.5)',
               borderRadius: '50%',
