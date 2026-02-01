@@ -49,12 +49,32 @@ Church administrators manage events, announcements, and member engagement from a
 git clone git@github.com:jareelireri-ops/Imani360.git
 cd Imani360
 
-2 Create a vite project
--npm create vite
--cd Page-Application
+2 Install Dependencies
+npm install
 
 3 Install Tailwind 
  -npm install tailwindcss @tailwindcss/vite
+
+4 Run the Development Server
+npm run dev
+
+## Component Tree
+.
+├── AdminLogin.jsx
+├── App.css
+├── App.jsx
+├── assets
+│   └── react.svg
+├── EventsScreen.jsx
+├── GivingScreen.jsx
+├── HomeScreen.jsx
+├── index.css
+├── main.jsx
+├── MoreScreen.jsx
+├── NoticesScreen.jsx
+└── PrayerScreen.jsx
+
+2 directories, 12 files
 
  ## Author
  This project was developed by :
