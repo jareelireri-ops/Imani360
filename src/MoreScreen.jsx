@@ -39,7 +39,7 @@ const MoreScreen = () => {
               fontWeight: '700',
               fontSize: 'clamp(18px, 4vw, 24px)',
               lineHeight: '1.3',
-              color: '#FFFFFF',
+              color: '#0e0c0c',
               textAlign: 'center',
               width: '100%',
               textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',

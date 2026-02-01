@@ -6,11 +6,12 @@ const GivingScreen = () => {
 
   // Function to copy text to clipboard
   const copyToClipboard = (text) => {
+
     navigator.clipboard.writeText(text).then(() => {
       alert(`Copied: ${text}`);
     }).catch(err => {
       console.error('Failed to copy: ', err);
-      alert('Failed to copy. Please try again.');
+      //alert('Failed to copy. Please try again.');
     });
   };
 

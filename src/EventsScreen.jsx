@@ -281,7 +281,7 @@ const EventsScreen = () => {
               fontFamily: "'Crimson Text', serif",
               fontWeight: '500',
                }}>
-  {selectedDate
+  {events.length === 0 
     ? 'No events on this date.'
     : 'No upcoming events this month—stay tuned! ✝️'}
 
