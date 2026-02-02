@@ -58,6 +58,73 @@ npm install
 4 Run the Development Server
 npm run dev
 
+### For Church Members
+
+- Open the application in your web browser.
+- Navigate through the **Home** screen to view:
+  - Notices and announcements
+  - Church events
+- Use the **Giving** section to view payment instructions and submit tithes or offerings.
+- Submit prayer requests via the **Prayer** screen, either anonymously or with your identity visible.
+
+### For Administrators
+
+- Access the **Admin Login** screen.
+- Log in using authorized admin credentials.
+- Manage:
+  - Notices and announcements
+  - Church events
+  - Church communications
+
+---
+
+##  Custom Hooks Breakdown
+
+### useAuth
+
+**Purpose:**  
+Manages authentication state across the application.
+
+**Responsibilities:**
+- Tracks the logged-in user
+- Handles login and logout
+- Protects restricted routes
+
+---
+
+### useFormState
+
+**Purpose:**  
+Manages form data for prayers, giving, and messages.
+
+**Responsibilities:**
+- Stores input values
+- Handles input changes
+- Resets form after submission
+
+---
+
+### useClipboard
+
+**Purpose:**  
+Enables copying of giving and payment details.
+
+**Responsibilities:**
+- Copies text to the clipboard
+- Provides user feedback on success or failure
+
+---
+
+### useNavigationFlow
+
+**Purpose:**  
+Controls step-based navigation between screens.
+
+**Responsibilities:**
+- Tracks the current screen
+- Prevents invalid navigation states
+
+
 ## Component Tree
 .
 ├── AdminLogin.jsx
@@ -81,7 +148,6 @@ npm run dev
  1.sugutasumpta@gmail.com
  2.
  3.
- 4.
 
 #License
 
