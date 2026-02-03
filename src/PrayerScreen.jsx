@@ -151,7 +151,7 @@ const PrayersScreen = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Enter your prayer request or message..."
-            className="w-full h-96 p-4 bg-gray-300 text-black rounded-lg mb-8 resize-none" // Doubled height to h-96 (384px)
+            className="w-full h-64 md:h-96 lg:h-[500px] p-4 bg-gray-300 text-black rounded-lg mb-8 resize-none"
           />
           <div className="space-y-4">
             <button
@@ -185,7 +185,7 @@ const PrayersScreen = () => {
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
                 transition: 'background-color 0.3s',
               }}
-              onMouseOver={(e) => e.target.style.backgroundColor = '#f97316'}
+              onMouseOver={(e) => e.target.style.backgroundColor = '#f9d716'}
               onMouseOut={(e) => e.target.style.backgroundColor = '#fb923c'}
             >
               SHARE ANONYMOUSLY📩
@@ -226,7 +226,7 @@ const PrayersScreen = () => {
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
               transition: 'background-color 0.3s',
             }}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#b91c1c'}
+            onMouseOver={(e) => e.target.style.backgroundColor = '#cf3d19'}
             onMouseOut={(e) => e.target.style.backgroundColor = '#dc2626'}
           >
             SEND 📩
@@ -255,8 +255,15 @@ const PrayersScreen = () => {
               ✝
             </div>
           </div>
-          <h1 className="text-white text-4xl font-bold mb-4" style={{ fontFamily: "'Dancing Script', cursive" }}>THANK YOU</h1>
-          <p className="text-white text-xl" style={{ fontFamily: "'Dancing Script', cursive" }}>Your message/prayer has been sent 😊</p>
+          <h1 className="text-white text-5xl font-bold mb-4" style={{ fontFamily: "'Dancing Script', cursive" }}>THANK YOU</h1>
+          <p
+          style={{
+            fontFamily:"'Crimson Text', serif",
+            color: '#e40ea3',
+          }}
+          >
+            Your message/prayer has been sent 😊
+            </p>
         </div>
       )}
     </div>

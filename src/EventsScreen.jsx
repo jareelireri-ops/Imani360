@@ -39,13 +39,21 @@ const EventsScreen = () => {
   };
 
   // Handle date click: select if not selected, deselect if already selected
-  const handleDateClick = (date) => {
+  /*const handleDateClick = (date) => {
     if (selectedDate && selectedDate.toDateString() === date.toDateString()) {
       setSelectedDate(null); // Deselect
     } else {
       setSelectedDate(date); // Select
     }
-  };
+  };*/
+  const handleDateClick = (date) => {
+  if (date < today) return; // ignore past dates
+  setSelectedDate(
+    selectedDate && selectedDate.toDateString() === date.toDateString() ? null : date
+  );
+};
+
+
 
   // Handle calendar view change to update viewed month
   const handleViewChange = ({ activeStartDate }) => {
@@ -58,7 +66,7 @@ const EventsScreen = () => {
       style={{
         background: 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.8) 0%, rgba(37, 40, 153, 0.9) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         margin: 0,
-        fontFamily: "'Montserrat', sans-serif",
+        fontFamily: "'Great Vibes', cursive",
       }}
     >
       {/* Header Container - Standardized */}
@@ -86,7 +94,7 @@ const EventsScreen = () => {
               fontWeight: '700',
               fontSize: 'clamp(18px, 4vw, 24px)',
               lineHeight: '1.3',
-              color: '#FFFFFF',
+              color: '#251d1d',
               textAlign: 'center',
               width: '100%',
               textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
@@ -266,8 +274,17 @@ const EventsScreen = () => {
               ))}
             </div>
           ) : (
-            <p className="text-white text-center">
-              {selectedDate ? 'No events on this date.' : 'No upcoming events this month—stay tuned! ✝️'}
+            <p 
+            className="text-center text-xl"
+            style={{
+              color: '#fd8aea', 
+              fontFamily: "'Crimson Text', serif",
+              fontWeight: '500',
+               }}>
+  {events.length === 0 
+    ? 'No events on this date.'
+    : 'No upcoming events this month—stay tuned! ✝️'}
+
             </p>
           )}
         </div>

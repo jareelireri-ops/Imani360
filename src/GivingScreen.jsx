@@ -6,11 +6,12 @@ const GivingScreen = () => {
 
   // Function to copy text to clipboard
   const copyToClipboard = (text) => {
+
     navigator.clipboard.writeText(text).then(() => {
       alert(`Copied: ${text}`);
     }).catch(err => {
       console.error('Failed to copy: ', err);
-      alert('Failed to copy. Please try again.');
+      //alert('Failed to copy. Please try again.');
     });
   };
 
@@ -30,8 +31,8 @@ const GivingScreen = () => {
           style={{
             boxSizing: 'border-box',
             height: '80px',
-            background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%)',
-            border: '2px solid rgba(255, 255, 255, 0.2)',
+            background: 'linear-gradient(135deg, #0c2a7e 0%, #3b82f6 50%, #1e40af 100%)',
+            border: '2px solid rgba(145, 49, 49, 0.2)',
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.1)',
             borderRadius: '12px',
             display: 'flex',
@@ -48,7 +49,7 @@ const GivingScreen = () => {
               fontWeight: '700',
               fontSize: 'clamp(18px, 4vw, 24px)',
               lineHeight: '1.3',
-              color: '#FFFFFF',
+              color: 'rgb(26, 24, 24)',
               textAlign: 'center',
               width: '100%',
               textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
@@ -137,22 +138,46 @@ const GivingScreen = () => {
       </div>
 
       {/* Main Content Block */}
-      <div className="w-full max-w-2xl text-left mb-8" style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 'bold', fontSize: '20px', color: 'white' }}>
-        <p>How to Give :</p>
-        <br />
-        <p>For tithes/offerings/thanksgiving use</p>
-        <p style={{ color: '#28FB36' }}>M-Pesa</p>
-        <p style={{ color: '#28FB36' }}>Buy goods Till Number: <span style={{ color: 'white', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => copyToClipboard('123456')}>123456</span></p>
-        <br />
-        <p>For honoring pledges/donations to church projects use</p>
-        <p style={{ color: '#28FB36' }}>Mpesa</p>
-        <p style={{ color: '#28FB36' }}>PAYBILL:</p>
-        <p>Business Number: <span style={{ color: 'white', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => copyToClipboard('654321')}>654321</span></p>
-        <p>Account Number: <span style={{ color: 'white', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => copyToClipboard('CHURCH001')}>CHURCH001</span></p>
+     <div className="w-full max-w-2xl text-left mb-8" style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 'bold', fontSize: '20px', color: 'white' }}> 
+      <p>How to Give :</p>
+       <br /> 
+
+       <p>For tithes/offerings/thanksgiving use</p> 
+       <p style={{ color: '#28FB36' }}>M-Pesa</p>
+        <p style={{ color: '#28FB36' }}>Buy goods Till Number:
+           <span style={{ color: 'white', cursor: 'pointer', textDecoration: 'underline' }}
+            onClick={() => copyToClipboard('123456')}
+            >
+            123456
+            </span>
+            </p> 
+            <br/> 
+
+           <p>For honoring pledges/donations to church projects use</p>
+            <p style={{ color: '#28FB36' }}>Mpesa</p> 
+            <p style={{ color: '#28FB36' }}>PAYBILL:</p>
+
+        <p>Business Number:{' '} 
+          <span
+            onClick={() => copyToClipboard('654321')}
+            className="underline cursor-pointer"
+          >
+            654321
+          </span>
+        </p>
+
+        <p>Account Number:{' '} 
+          <span onClick={() => copyToClipboard('CHURCH001')}
+            className="underline cursor-pointer"
+          >
+            CHURCH001
+          </span>
+        </p>
       </div>
 
+
       {/* Thank You Message */}
-      <div className="w-full max-w-2xl text-center" style={{ fontFamily: "'Dancing Script', cursive", fontSize: '26px', color: '#DFFF2B' }}>
+      <div className="w-full max-w-2xl text-center" style={{ fontFamily: "'Dancing Script', cursive", fontSize: '26px', color: '#86e717ea' }}>
         <p>Thank You for your generous giving .</p>
         <p>Be Blessed 🤍</p>
       </div>
