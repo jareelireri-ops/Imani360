@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import HomeScreen from './HomeScreen'; 
 import MoreScreen from './MoreScreen'; 
 import AdminLogin from './AdminLogin';
@@ -11,8 +11,10 @@ import JoinGroupScreen from './JoinGroupScreen';
 import PreviousSermonsScreen from './PreviousSermonScreen';
 import MembersConnectScreen from './MembersConnectScreen';
 import SettingScreen from './SettingScreen';
+
 function App() {
   return (
+    
     <Router>
       <Routes>
         <Route path="/" element={<HomeScreen />} /> 

@@ -10,8 +10,6 @@ const SettingsScreen = () => {
   const [showModal, setShowModal] = useState(null);
   const fontSizeMultiplier = fontSize === 'Small' ? 0.8 : fontSize === 'Large' ? 1.2 : 1;
 
-  const handleInvite = () => alert('Invite link copied! Share: https://yourapp.com/invite');
-
   const updateSetting = (key, value) => {
     localStorage.setItem(key, typeof value === 'boolean' ? JSON.stringify(value) : value);
     console.log(`${key} updated to:`, value);
@@ -189,18 +187,51 @@ const SettingsScreen = () => {
                 <button onClick={() => setShowModal(null)} style={{ backgroundColor: '#10b981', color: 'white', padding: '10px', borderRadius: '8px', width: '100%', border: 'none', cursor: 'pointer' }}>Close</button>
               </div>
             )}
-            {showModal === 'rate' && (
-              <div>
-                <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '15px' }}>Rate Us</h3>
-                <div style={{ marginBottom: '20px' }}>
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <span key={star} onClick={() => setRating(star)} style={{ cursor: 'pointer', fontSize: '32px', color: star <= rating ? '#f59e0b' : '#d1d5db', margin: '0 5px' }}>★</span>
-                  ))}
-                </div>
-                <button onClick={handleInvite} style={{ backgroundColor: '#a855f7', color: 'white', padding: '10px', borderRadius: '8px', width: '100%', marginBottom: '10px', border: 'none', cursor: 'pointer' }}>Invite a New Member</button>
-                <button onClick={() => setShowModal(null)} style={{ backgroundColor: '#6b7280', color: 'white', padding: '10px', borderRadius: '8px', width: '100%', border: 'none', cursor: 'pointer' }}>Close</button>
-              </div>
-            )}
+           {showModal === 'rate' && (
+  <div>
+    <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '15px' }}>Rate Us</h3>
+    <div style={{ marginBottom: '20px' }}>
+      
+      {[1, 2, 3, 4, 5].map((star) => (
+        <span
+          key={star}
+          onClick={() => {
+            setRating(star);
+          }}
+          style={{
+            cursor: 'pointer',
+            fontSize: '32px',
+            color: star <= rating ? '#f59e0b' : '#d1d5db',
+            margin: '0 5px'
+          }}
+        >
+          ★
+        </span>
+      ))}
+    </div>
+    
+    <button 
+      onClick={() => {
+        // Using the Navigator Clipboard API to copy link
+        const inviteLink = "https://yourapp.com";
+        navigator.clipboard.writeText(inviteLink)
+          .then(() => alert("Invite link copied! Share it with your friends."))
+          .catch((err) => console.error("Could not copy text: ", err));
+      }} 
+      style={{ backgroundColor: '#a855f7', color: 'white', padding: '12px', borderRadius: '8px', width: '100%', marginBottom: '10px', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}
+    >
+      Invite a New Member 🔗
+    </button>
+
+    <button 
+      onClick={() => setShowModal(null)} 
+      style={{ backgroundColor: '#6b7280', color: 'white', padding: '10px', borderRadius: '8px', width: '100%', border: 'none', cursor: 'pointer' }}
+    >
+      Close
+    </button>
+  </div>
+)}
+
             {showModal === 'help' && (
               <div>
                 <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '15px' }}>Help & Support</h3>
