@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Remove default browser margins */
+
 body {
   margin: 0;
 }

@@ -53,52 +53,53 @@ const MoreScreen = () => {
       </div>
 
       {/* Navigation Buttons - Standardized */}
-<div className="w-full max-w-2xl flex justify-between items-center mb-4">
-  <button
-    onClick={() => navigate(-1)} // Or custom handleBack for PrayersScreen
-    style={{
-      backgroundColor: '#06b6d4', // Cyan
-      color: 'white',
-      borderRadius: '50%',
-      width: '80px',
-      height: '80px',
-      border: '2px solid rgba(255, 255, 255, 0.3)',
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-      fontSize: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      transition: 'background-color 0.3s',
-    }}
-    onMouseOver={(e) => e.target.style.backgroundColor = '#0891b2'}
-    onMouseOut={(e) => e.target.style.backgroundColor = '#06b6d4'}
-    title="Back"
-  >
-    ←
-  </button>
-  <button
-    onClick={() => navigate('/')}
-    style={{
-      backgroundColor: 'black', // Black
-      color: 'white',
-      borderRadius: '50%',
-      width: '80px',
-      height: '80px',
-      border: '2px solid rgba(255, 255, 255, 0.3)',
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-      fontSize: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      transition: 'background-color 0.3s',
-    }}
-    onMouseOver={(e) => e.target.style.backgroundColor = '#333'}
-    onMouseOut={(e) => e.target.style.backgroundColor = 'black'}
-    title="Home"
-  >
-    🏠
-  </button>
-</div>
+      <div className="w-full max-w-2xl flex justify-between items-center mb-4">
+        <button
+          onClick={() => navigate(-1)} // Or custom handleBack for PrayersScreen
+          style={{
+            backgroundColor: '#06b6d4', // Cyan
+            color: 'white',
+            borderRadius: '50%',
+            width: '80px',
+            height: '80px',
+            border: '2px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+            fontSize: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#0891b2'}
+          onMouseOut={(e) => e.target.style.backgroundColor = '#06b6d4'}
+          title="Back"
+        >
+          ←
+        </button>
+        <button
+          onClick={() => navigate('/')}
+          style={{
+            backgroundColor: 'black', // Black
+            color: 'white',
+            borderRadius: '50%',
+            width: '80px',
+            height: '80px',
+            border: '2px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+            fontSize: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#333'}
+          onMouseOut={(e) => e.target.style.backgroundColor = 'black'}
+          title="Home"
+        >
+          🏠
+        </button>
+      </div>
+
       {/* Metallic Cross - Enhanced Glow */}
       <div className="mb-12 relative">
         <div
@@ -131,10 +132,10 @@ const MoreScreen = () => {
       <div className="w-full max-w-2xl flex flex-col items-center mb-16 px-4">
         <div className="grid grid-cols-2 gap-4 sm:gap-8 md:gap-12 lg:gap-16 w-full justify-items-center">
           {[
-            { icon: '👥', text: 'JOIN A<br />GROUP' },
-            { icon: '📖', text: 'PREVIOUS<br />SERMONS' },
-            { icon: '🤝', text: 'MEMBERS<br />CONNECT' },
-            { icon: '⚙️', text: 'SETTINGS' },
+            { icon: '👥', text: 'JOIN A<br />GROUP', route: '/join-group' },
+            { icon: '📖', text: 'PREVIOUS<br />SERMONS', route: '/previous-sermons' },
+            { icon: '🤝', text: 'MEMBERS<br />CONNECT', route: '/members-connect' },
+            { icon: '⚙️', text: 'SETTINGS', route: '/settings' },
           ].map((card, index) => (
             <div
               key={index}
@@ -148,6 +149,7 @@ const MoreScreen = () => {
                 borderRadius: '20px',
                 padding: 'clamp(8px, 2vw, 12px)',
               }}
+              onClick={() => navigate(card.route)} // Navigate to respective route
             >
               <div className="mb-2 text-[clamp(22px, 6vw, 28px)] group-hover:animate-bounce">{card.icon}</div>
               <div 
