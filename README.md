@@ -145,9 +145,9 @@ Controls step-based navigation between screens.
 
  ## Author
  This project was developed by :
- 1.sugutasumpta@gmail.com
- 2.
- 3.
+ 1.Asumpta2640
+ 2.jareelireri-ops
+ 3.Khal756
 
 #License
 
