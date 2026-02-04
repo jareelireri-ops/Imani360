@@ -132,10 +132,10 @@ const MoreScreen = () => {
       <div className="w-full max-w-2xl flex flex-col items-center mb-16 px-4">
         <div className="grid grid-cols-2 gap-4 sm:gap-8 md:gap-12 lg:gap-16 w-full justify-items-center">
           {[
-            { icon: '👥', text: 'JOIN A<br />GROUP', route: '/join-group' },
-            { icon: '📖', text: 'PREVIOUS<br />SERMONS', route: '/previous-sermons' },
-            { icon: '🤝', text: 'MEMBERS<br />CONNECT', route: '/members-connect' },
-            { icon: '⚙️', text: 'SETTINGS', route: '/settings' },
+            { icon: '💰', text: 'PLEDGES', route: '/pledges' }, // Top Left
+            { icon: '📖', text: 'PREVIOUS<br />SERMONS', route: '/previous-sermons' }, // Top Right
+            { icon: '🤝', text: 'MEMBERS<br />CONNECT', route: '/members-connect' }, // Bottom Left
+            { icon: '⚙️', text: 'SETTINGS', route: '/settings' }, // Bottom Right
           ].map((card, index) => (
             <div
               key={index}

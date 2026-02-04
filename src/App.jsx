@@ -7,7 +7,6 @@ import NoticesScreen from './NoticesScreen';
 import EventsScreen from './EventsScreen';
 import PrayersScreen from './PrayerScreen';
 import GivingScreen from './GivingScreen';
-import JoinGroupScreen from './JoinGroupScreen';
 import PreviousSermonsScreen from './PreviousSermonScreen';
 import MembersConnectScreen from './MembersConnectScreen';
 import SettingScreen from './SettingScreen';
@@ -24,7 +23,6 @@ function App() {
         <Route path="/events" element={<EventsScreen />} />
         <Route path="/prayers" element={<PrayersScreen />} />
         <Route path="/giving" element={<GivingScreen />} />
-        <Route path="/join-group" element={<JoinGroupScreen />} />
         <Route path="/previous-sermons" element={<PreviousSermonsScreen />} />
         <Route path="/members-connect" element={<MembersConnectScreen />} />
         <Route path="/settings" element={<SettingScreen />} />

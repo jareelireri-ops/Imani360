@@ -188,7 +188,7 @@ const HomeScreen = () => {
           ))}
         </div>
 
-        {/* MORE Button Below Grid with css styling to match navigation cards but unique */}
+        {/* MORE Button Below Grid with css styling to match navigation cards but unique rotation thingy */}
         <div className="flex justify-center mt-8">
           <div
             className="flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 hover:rotate-12 group"
