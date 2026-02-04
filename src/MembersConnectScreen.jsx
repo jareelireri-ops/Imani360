@@ -17,7 +17,7 @@ const MembersConnectScreen = () => {
     { name: 'Juliah Wanjiru', number: '111-222-3333', groups: ['Women', 'Junior Youth'], share: true },
   ]);
 
-  // Mock group stats (now dynamic)
+  // Mock group stats 
   const [groupStats, setGroupStats] = useState({
     'Praise and Worship': 15,
     'Men': 10,

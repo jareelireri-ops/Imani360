@@ -12,7 +12,7 @@ const PrayersScreen = () => {
   const handleShareAnonymously = () => setCurrentView('thankyou');
   const handleSend = () => setCurrentView('thankyou');
 
-  // Custom back function: Go back within views, not to previous page
+  // Custom back function: Go back depending on views, not to previous page
   const handleBack = () => {
     if (currentView === 'details' || currentView === 'thankyou') {
       setCurrentView('main'); // Go back to main prayer screen
@@ -95,7 +95,7 @@ const PrayersScreen = () => {
         <button
           onClick={() => navigate('/')}
           style={{
-            backgroundColor: 'black', // Black
+            backgroundColor: 'black', 
             color: 'white',
             borderRadius: '50%',
             width: '80px',

@@ -1,8 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Add this import
+import { useNavigate } from 'react-router-dom'; 
 
 const HomeScreen = () => {
-  const navigate = useNavigate(); // Add this hook
+  const navigate = useNavigate(); 
 
   return (
     <div 

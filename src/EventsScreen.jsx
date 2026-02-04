@@ -1,294 +1,172 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
+// EventsScreen Component
 const EventsScreen = () => {
   const navigate = useNavigate();
-  const [selectedDate, setSelectedDate] = useState(null); // null means no date selected
-  const [viewedMonth, setViewedMonth] = useState(new Date()); // Track the calendar's viewed month
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [viewedMonth, setViewedMonth] = useState(new Date());
 
-  // Dummy event data (expand with real data/API; assume posters are URLs from admin uploads)
+  // Sample event data also with some ai generated posters as urls for testing
+  // (but posterbrings 404)
   const events = [
-    { id: 1, title: 'Sunday Worship Service', date: '2023-10-15', time: '10:00 AM', location: 'Main Sanctuary', description: 'Join us for praise and worship.', category: 'Worship', icon: '🙏', poster: 'https://example.com/worship-poster.jpg' },
-    { id: 2, title: 'Community Outreach', date: '2023-10-20', time: '2:00 PM', location: 'Downtown Park', description: 'Serving the community with love.', category: 'Outreach', icon: '🤝', poster: null },
-    { id: 3, title: 'Bible Study Group', date: '2023-10-25', time: '7:00 PM', location: 'Fellowship Hall', description: 'Dive deep into scripture.', category: 'Study', icon: '📖', poster: 'https://example.com/bible-study-poster.jpg' },
-    // Add more events
+    { 
+      id: 1, 
+      title: "Men's Conference", 
+      date: '2026-02-04', // Today
+      time: '5:30 PM', 
+      location: 'Church', 
+      description: 'Empowering the men of the sanctuary in word and fellowship.', 
+      category: 'Conference', 
+      icon: '👨‍💼', 
+      poster: 'https://images.unsplash.com/photo-1475721027187-402ad2989a38?auto=format&fit=crop&w=800' 
+    },
+    { 
+      id: 2, 
+      title: 'Music Extravaganza', 
+      date: '2026-02-06', 
+      time: '2:00 PM', 
+      location: 'UNICAS Garden', 
+      description: 'A massive celebration of praise and worship in the garden.', 
+      category: 'Worship', 
+      icon: '🎸', 
+      poster: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800' 
+    },
+    { 
+      id: 3, 
+      title: 'Senior Youth Day', 
+      date: '2026-02-08', 
+      time: '10:00 AM', 
+      location: 'Church', 
+      description: 'Focusing on the next generation of leaders.', 
+      category: 'Youth', 
+      icon: '🙌', 
+      poster: 'https://images.unsplash.com/photo-1523580494863-6f30312248fd?auto=format&fit=crop&w=800' 
+    },
+    { 
+      id: 4, 
+      title: 'Junior Youth Day', 
+      date: '2026-02-14', 
+      time: '9:00 AM', 
+      location: 'UNICAS Garden', 
+      description: 'A fun-filled day of activities for our younger stars.', 
+      category: 'Youth', 
+      icon: '⚽', 
+      poster: 'https://images.unsplash.com/photo-1472653376319-380a7ece254a?auto=format&fit=crop&w=800' 
+    }
   ];
 
-  // Get today's date for highlighting
+  // Filter events for the viewed month and sort them
   const today = new Date();
-  const todayString = today.toISOString().split('T')[0];
+  today.setHours(0, 0, 0, 0); 
+  const todayStr = today.toLocaleDateString('en-CA');
 
-  // Filter events for the viewed month (upcoming only, from today onward)
+  // Events in the currently viewed month
   const viewedMonthEvents = events.filter(event => {
-    const eventDate = new Date(event.date);
-    return eventDate >= today && 
-           eventDate.getMonth() === viewedMonth.getMonth() && 
-           eventDate.getFullYear() === viewedMonth.getFullYear();
+    const eDate = new Date(event.date);
+    return eDate >= today && 
+           eDate.getMonth() === viewedMonth.getMonth() && 
+           eDate.getFullYear() === viewedMonth.getFullYear();
   }).sort((a, b) => new Date(a.date) - new Date(b.date));
 
-  // Filter events for selected date
-  const selectedEvents = selectedDate
-    ? events.filter(event => event.date === selectedDate.toISOString().split('T')[0])
+  // Events on the selected date,completed bymy copilot
+  const selectedEvents = selectedDate 
+    ? events.filter(e => e.date === selectedDate.toLocaleDateString('en-CA')) 
     : [];
 
-  // Function to check if a date has events
-  const hasEvent = (date) => {
-    return events.some(event => event.date === date.toISOString().split('T')[0]);
-  };
-
-  // Handle date click: select if not selected, deselect if already selected
-  /*const handleDateClick = (date) => {
-    if (selectedDate && selectedDate.toDateString() === date.toDateString()) {
-      setSelectedDate(null); // Deselect
-    } else {
-      setSelectedDate(date); // Select
-    }
-  };*/
+    // Handle date click
   const handleDateClick = (date) => {
-  if (date < today) return; // ignore past dates
-  setSelectedDate(
-    selectedDate && selectedDate.toDateString() === date.toDateString() ? null : date
-  );
-};
-
-
-
-  // Handle calendar view change to update viewed month
-  const handleViewChange = ({ activeStartDate }) => {
-    setViewedMonth(activeStartDate);
+    if (date < today) return; 
+    setSelectedDate(selectedDate?.toDateString() === date.toDateString() ? null : date);
   };
 
+  // Main render,
   return (
-    <div 
-      className="min-h-screen flex flex-col items-center justify-start pt-12 pb-20 px-4"
-      style={{
-        background: 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.8) 0%, rgba(37, 40, 153, 0.9) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        margin: 0,
-        fontFamily: "'Great Vibes', cursive",
-      }}
-    >
-      {/* Header Container - Standardized */}
+    <div className="min-h-screen flex flex-col items-center pt-12 pb-20 px-4"
+      style={{ background: 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.8) 0%, rgba(37, 40, 153, 0.9) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(135deg, #667eea 0%, #764ba2 100%)', fontFamily: "'Montserrat', sans-serif" }}>
+      
       <div className="w-full max-w-2xl mb-8">
-        <div
-          className="w-full relative overflow-hidden"
-          style={{
-            boxSizing: 'border-box',
-            height: '80px',
-            background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%)',
-            border: '2px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.1)',
-            borderRadius: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '0 20px',
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
-          <div
-            style={{
-              fontFamily: "'Crimson Text', serif",
-              fontStyle: 'normal',
-              fontWeight: '700',
-              fontSize: 'clamp(18px, 4vw, 24px)',
-              lineHeight: '1.3',
-              color: '#251d1d',
-              textAlign: 'center',
-              width: '100%',
-              textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-              zIndex: 1,
-              position: 'relative',
-            }}
-          >
+        <div className="w-full relative overflow-hidden flex items-center justify-center h-20 rounded-xl border-2 border-white/20 shadow-2xl bg-gradient-to-r from-blue-900 via-blue-500 to-blue-800 px-5">
+          <div className="absolute inset-0 bg-white/10 animate-pulse"></div>
+          <h1 className="relative z-10 text-white font-bold text-center leading-tight uppercase" style={{ fontFamily: "'Crimson Text', serif", fontSize: 'clamp(16px, 4vw, 22px)' }}>
             CHRISTIAN CHURCH INTERNATIONAL LIGHT SANCTUARY
-          </div>
+          </h1>
         </div>
       </div>
 
-      {/* Navigation Buttons - Standardized */}
-      <div className="w-full max-w-2xl flex justify-between items-center mb-4">
-        <button
-          onClick={() => navigate(-1)}
-          style={{
-            backgroundColor: '#06b6d4', // Cyan
-            color: 'white',
-            borderRadius: '50%',
-            width: '80px',
-            height: '80px',
-            border: '2px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-            fontSize: '24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'background-color 0.3s',
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#0891b2'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#06b6d4'}
-          title="Back"
-        >
-          ←
-        </button>
-        <button
-          onClick={() => navigate('/')}
-          style={{
-            backgroundColor: 'black', // Black
-            color: 'white',
-            borderRadius: '50%',
-            width: '80px',
-            height: '80px',
-            border: '2px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-            fontSize: '24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'background-color 0.3s',
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#333'}
-          onMouseOut={(e) => e.target.style.backgroundColor = 'black'}
-          title="Home"
-        >
-          🏠
-        </button>
+      <div className="w-full max-w-2xl flex justify-between mb-8">
+        <button onClick={() => navigate(-1)} className="w-16 h-16 bg-cyan-500 text-white rounded-full border-2 border-white/30 shadow-lg text-2xl hover:bg-cyan-600 transition-all active:scale-95 flex items-center justify-center">←</button>
+        <button onClick={() => navigate('/')} className="w-16 h-16 bg-black text-white rounded-full border-2 border-white/30 shadow-lg text-2xl hover:bg-zinc-900 transition-all active:scale-95 flex items-center justify-center">🏠</button>
       </div>
 
-      {/* Metallic Cross - Standardized */}
-      <div className="mb-12 relative" style={{ textAlign: 'center' }}>
-        <div
-          style={{
-            fontSize: 'clamp(36px, 8vw, 54px)',
-            color: '#ffffff',
-            textShadow: `
-              0 0 20px rgba(255, 255, 255, 0.8),
-              0 0 40px rgba(255, 215, 0, 0.6),
-              0 0 60px rgba(255, 215, 0, 0.4),
-              0 0 80px rgba(255, 215, 0, 0.2)
-            `,
-            filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.4))',
-            lineHeight: '1',
-            animation: 'glow 2s ease-in-out infinite alternate',
-          }}
-        >
-          ✝
-        </div>
-        <style>{`
-          @keyframes glow {
-            from { filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)) brightness(1); }
-            to { filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)) brightness(1.1); }
-          }
-        `}</style>
-      </div>
+      <div className="mb-10 text-white text-5xl drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] animate-pulse">✝</div>
 
-      {/* Responsive Container: Stack on Mobile, Side-by-Side on Larger Screens */}
-      <div className="w-full max-w-4xl flex flex-col md:flex-row gap-8">
-        {/* Calendar Section - Top on Mobile, Left on Larger */}
-        <div className="w-full md:w-1/3 flex flex-col items-center"> {/* Full width on mobile, 1/3 on larger */}
+      <div className="w-full max-w-4xl flex flex-col md:flex-row gap-10">
+        <div className="w-full md:w-1/3 flex flex-col items-center">
           <Calendar
             onClickDay={handleDateClick}
-            onActiveStartDateChange={handleViewChange}
+            onActiveStartDateChange={({ activeStartDate }) => setViewedMonth(activeStartDate)}
             value={selectedDate}
-            activeStartDate={viewedMonth}
-            tileClassName={({ date }) => hasEvent(date) ? 'event-day' : null}
-            className="react-calendar mb-4"
+            tileClassName={({ date }) => events.some(e => e.date === date.toLocaleDateString('en-CA')) ? 'event-day' : null}
+            className="rounded-xl border-none shadow-2xl overflow-hidden"
           />
-          {/* Buttons Below Calendar */}
-          <div className="flex flex-col space-y-2">
-            <button 
-              onClick={() => setViewedMonth(new Date())} 
-              className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-2 rounded-lg hover:from-yellow-500 hover:to-yellow-700 shadow-lg font-bold transition-all duration-300"
-              style={{ 
-                boxShadow: '0 0 20px rgba(255, 215, 0, 0.8), inset 0 2px 4px rgba(255, 255, 255, 0.2)',
-                animation: 'glow 2s ease-in-out infinite alternate' // Unique glow animation
-              }}
-            >
-              Today
-            </button>
-            {selectedDate && (
-              <button 
-                onClick={() => setSelectedDate(null)} 
-                className="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-purple-800 shadow-lg font-bold transition-all duration-300"
-                style={{ 
-                  boxShadow: '0 0 15px rgba(147, 51, 234, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.1)' // Unique purple glow
-                }}
-              >
-                Show All for {viewedMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}
-              </button>
-            )}
+          <div className="flex flex-col gap-3 mt-6 w-full px-4">
+            <button onClick={() => { setViewedMonth(new Date()); setSelectedDate(null); }} className="bg-yellow-500 text-white py-2 rounded-lg font-bold shadow-lg hover:bg-yellow-600 active:scale-95 transition-all">Go to Today</button>
+            {selectedDate && <button onClick={() => setSelectedDate(null)} className="bg-purple-600 text-white py-2 rounded-lg font-bold shadow-lg active:scale-95 transition-all">Clear Selection</button>}
           </div>
-          <style>{`
-            .react-calendar { 
-              background: linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%);
-              border-radius: 12px;
-              color: white;
-            }
-            .event-day { 
-              background: rgba(255, 215, 0, 0.3) !important; 
-              border-radius: 50%; 
-            }
-            @keyframes glow {
-              from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
-              to { box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
-            }
-          `}</style>
+          
         </div>
 
-        {/* Events List - Bottom on Mobile, Right on Larger */}
-        <div className="w-full md:w-2/3"> {/* Full width on mobile, 2/3 on larger */}
-          <h2 className="text-white text-xl font-bold mb-4">
-            {selectedDate ? `Events on ${selectedDate.toDateString()}` : `Upcoming Events - ${viewedMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}`}
+        <div className="w-full md:w-2/3">
+          <h2 className="text-white text-xl font-bold mb-6 border-b border-white/20 pb-2">
+            {selectedDate ? `Events: ${selectedDate.toDateString()}` : `Upcoming: ${viewedMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}`}
           </h2>
-          {(selectedDate ? selectedEvents : viewedMonthEvents).length > 0 ? (
-            <div className="space-y-4">
-              {(selectedDate ? selectedEvents : viewedMonthEvents).map(event => (
-                <div 
-                  key={event.id} 
-                  className={`bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow-lg hover:scale-105 transition ${event.date === todayString ? 'border-2 border-yellow-400 shadow-yellow-400/50' : ''}`}
-                  style={event.date === todayString ? { boxShadow: '0 0 20px rgba(255, 215, 0, 0.5)' } : {}}
-                >
-                  <div className="flex items-center mb-2">
-                    <span className="text-2xl mr-3">{event.icon}</span>
-                    <div>
-                      <h3 className="text-white font-bold">{event.title}</h3>
-                      {!selectedDate && <p className="text-white/80 text-sm">{event.date}</p>} {/* Show date only in month view */}
+          
+          <div className="space-y-5">
+            {(selectedDate ? selectedEvents : viewedMonthEvents).length > 0 ? (
+              (selectedDate ? selectedEvents : viewedMonthEvents).map(event => (
+                <div key={event.id} className={`bg-white/10 backdrop-blur-md p-5 rounded-xl border-l-4 transition-all hover:translate-x-1 ${event.date === todayStr ? 'border-yellow-400 bg-white/20 shadow-[0_0_15px_rgba(255,215,0,0.3)]' : 'border-cyan-400'}`}>
+                  <div className="flex items-center gap-4 mb-3">
+                    <span className="text-3xl">{event.icon}</span>
+                    <div className="flex-1">
+                      <h3 className="text-white font-bold text-lg">{event.title}</h3>
+                      {!selectedDate && <p className="text-white/60 text-xs italic">{event.date}</p>}
                     </div>
                   </div>
-                  {selectedDate && ( // Show details only when date is selected
-                    <>
-                      <p className="text-white/70 text-sm">Time: {event.time}</p>
-                      <p className="text-white/70 text-sm">Location: {event.location}</p>
-                      <p className="text-white/70 text-sm mb-2">{event.description}</p>
-                      {event.poster && (
-                        <img 
-                          src={event.poster} 
-                          alt="Event Poster" 
-                          className="w-full h-32 object-cover rounded mb-2 cursor-pointer hover:opacity-80" 
-                          onClick={() => window.open(event.poster, '_blank')}
-                        />
-                      )}
-                    </>
+                  
+                  {selectedDate && (
+                    <div className="text-white/80 text-sm space-y-2 animate-fadeIn">
+                      <p className="flex items-center gap-2"><span>🕒</span> {event.time} | <span>📍</span> {event.location}</p>
+                      <p className="leading-relaxed">{event.description}</p>
+                      {event.poster && <img src={event.poster} alt="Poster" className="w-full h-40 object-cover rounded-lg mt-3 cursor-zoom-in hover:brightness-110 transition-all" onClick={() => window.open(event.poster, '_blank')}/>}
+                    </div>
                   )}
                 </div>
-              ))}
-            </div>
-          ) : (
-            <p 
-            className="text-center text-xl"
-            style={{
-              color: '#fd8aea', 
-              fontFamily: "'Crimson Text', serif",
-              fontWeight: '500',
-               }}>
-  {events.length === 0 
-    ? 'No events on this date.'
-    : 'No upcoming events this month—stay tuned! ✝️'}
-
-            </p>
-          )}
+              ))
+            ) : (
+              <div className="text-center py-10">
+                <p className="text-pink-200 italic font-serif text-lg drop-shadow-md">No events found for this period. Stay tuned! ✝️</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      <style>{`
+        .react-calendar { background: linear-gradient(135deg, #06b6d4 0%, #0e7490 100%) !important; border: none !important; color: white !important; width: 100% !important; border-radius: 12px; }
+        .react-calendar__navigation button { color: white !important; font-size: 1.2rem; }
+        .react-calendar__month-view__weekdays { font-weight: bold; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+        .react-calendar__tile { color: white !important; height: 45px !important; }
+        .react-calendar__tile:enabled:hover { background-color: rgba(255,255,255,0.2) !important; border-radius: 8px; }
+        .react-calendar__tile--now { background: #1e3a8a !important; border-radius: 8px; }
+        .react-calendar__tile--active { background: white !important; color: #0891b2 !important; border-radius: 8px; font-weight: bold; }
+        .event-day { position: relative; font-weight: bold; }
+        .event-day::after { content: ''; position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; background: gold; border-radius: 50%; box-shadow: 0 0 5px gold; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+      `}</style>
     </div>
   );
 };
