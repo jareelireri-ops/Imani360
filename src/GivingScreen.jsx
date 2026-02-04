@@ -15,6 +15,7 @@ const GivingScreen = () => {
     });
   };
 
+  // Main render,
   return (
     <div 
       className="min-h-screen flex flex-col items-center justify-start pt-12 pb-20 px-4"

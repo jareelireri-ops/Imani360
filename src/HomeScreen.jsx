@@ -188,7 +188,7 @@ const HomeScreen = () => {
           ))}
         </div>
 
-        {/* MORE Button - Professional and Interactive */}
+        {/* MORE Button Below Grid with css styling to match navigation cards but unique */}
         <div className="flex justify-center mt-8">
           <div
             className="flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 hover:rotate-12 group"
@@ -201,7 +201,7 @@ const HomeScreen = () => {
               borderRadius: '20px',
               padding: 'clamp(8px, 2vw, 10px)',
             }}
-            onClick={() => navigate('/more')} // Add this onClick to navigate
+            onClick={() => navigate('/more')} // Navigate to MORE screen
           >
             <div className="mb-1 text-[clamp(20px, 5vw, 24px)] group-hover:animate-spin">+</div>
             <div className="text-center font-black text-white text-[clamp(9px, 2vw, 11px)] drop-shadow-md">MORE</div>

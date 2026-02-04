@@ -96,9 +96,52 @@ const EventsScreen = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-2xl flex justify-between mb-8">
-        <button onClick={() => navigate(-1)} className="w-16 h-16 bg-cyan-500 text-white rounded-full border-2 border-white/30 shadow-lg text-2xl hover:bg-cyan-600 transition-all active:scale-95 flex items-center justify-center">←</button>
-        <button onClick={() => navigate('/')} className="w-16 h-16 bg-black text-white rounded-full border-2 border-white/30 shadow-lg text-2xl hover:bg-zinc-900 transition-all active:scale-95 flex items-center justify-center">🏠</button>
+      {/* Navigation Buttons - Standardized */}
+      <div className="w-full max-w-2xl flex justify-between items-center mb-4">
+        <button
+          onClick={() => navigate(-1)}
+          style={{
+            backgroundColor: '#06b6d4', // Cyan
+            color: 'white',
+            borderRadius: '50%',
+            width: '80px',
+            height: '80px',
+            border: '2px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+            fontSize: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#0891b2'}
+          onMouseOut={(e) => e.target.style.backgroundColor = '#06b6d4'}
+          title="Back"
+        >
+          ←
+        </button>
+        <button
+          onClick={() => navigate('/')}
+          style={{
+            backgroundColor: 'black', // Black
+            color: 'white',
+            borderRadius: '50%',
+            width: '80px',
+            height: '80px',
+            border: '2px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+            fontSize: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#333'}
+          onMouseOut={(e) => e.target.style.backgroundColor = 'black'}
+          title="Home"
+        >
+          🏠
+        </button>
       </div>
 
       <div className="mb-10 text-white text-5xl drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] animate-pulse">✝</div>
