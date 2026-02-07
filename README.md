@@ -147,8 +147,7 @@ Controls step-based navigation between screens.
  This project was developed by :
  1.Asumpta2640
  2.jareelireri-ops
- 3.Khal756
-
+ 
 #License
 
 This Project is licensed under the MIT License
