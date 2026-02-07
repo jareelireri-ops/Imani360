@@ -130,10 +130,11 @@ const GivingScreen = () => {
         >
           ✝
         </div>
+        {/* Glow Animation Keyframes */}
         <style>{`
           @keyframes glow {
-            from { filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)) brightness(1); }
-            to { filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)) brightness(1.1); }
+            from {filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));}
+            to {filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));}
           }
         `}</style>
       </div>

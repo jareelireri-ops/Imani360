@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext'; // <--- ADD THIS IMPORT
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth(); // <--- GET THE LOGIN FUNCTION FROM CONTEXT
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Basic validation (replace with real auth logic later)
-    if (username === 'admin' && password === 'password') { // Example credentials
-      alert('Login successful!'); // Replace with actual navigation or state update
-      // navigate('/admin-dashboard'); // Uncomment to go to a dashboard after login
+    
+   // Call the login function from AuthContext with the entered credentials
+    const result = login(username, password);
+
+    if (result.success) {
+      alert(`Welcome ${result.name}`);
+      navigate('/'); 
     } else {
       alert('Invalid credentials');
     }
@@ -19,83 +24,73 @@ const AdminLogin = () => {
 
   return (
     <div 
-      className="min-h-screen flex flex-col items-center justify-center pt-12 pb-20 px-4"
+      className="min-h-screen flex flex-col items-center justify-center px-4 transition-all duration-500"
       style={{
-        background: 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.8) 0%, rgba(37, 40, 153, 0.9) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+       background: 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.8) 0%, rgba(37, 40, 153, 0.9) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         margin: 0,
-        fontFamily: "'Montserrat', sans-serif",
+       fontFamily: "'Montserrat', sans-serif",
       }}
     >
-      {/* Header */}
-      <div className="w-full max-w-md mb-8">
-        <div
-          style={{
-            background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%)',
-            border: '2px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.1)',
-            borderRadius: '12px',
-            padding: '20px',
-            textAlign: 'center',
-          }}
-        >
-          <h1 className="text-white font-black text-2xl drop-shadow-md">ADMIN LOGIN</h1>
-        </div>
+      {/* Header - Refined */}
+      <div className="w-full max-w-md text-center mb-8">
+        <h1 className="text-white font-black text-4xl tracking-tighter drop-shadow-2xl">
+          STAFF <span className="text-indigo-300">PORTAL</span>
+        </h1>
+        <div className="h-1 w-20 bg-indigo-400 mx-auto mt-2 rounded-full opacity-50"></div>
       </div>
 
-      {/* Navigation Buttons */}
-      <div className="w-full max-w-md flex justify-between items-center mb-4">
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-gray-500 to-gray-700 text-white rounded-full hover:from-gray-600 hover:to-gray-800 transition duration-300 shadow-2xl border-2 border-white/30"
-          title="Back"
-        >
-          ←
-        </button>
-        <button
-          onClick={() => navigate('/')}
-          className="flex items-center justify-center w-16 h-16 bg-black text-white rounded-full hover:bg-gray-800 transition duration-300 shadow-2xl border-2 border-white/30"
-          title="Home"
-        >
-          🏠
-        </button>
+      {/* Glassmorphic Form Container */}
+      <div className="w-full max-w-md bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/20">
+        
+        {/* Navigation - Integrated inside the card for a cleaner look */}
+        <div className="flex justify-between mb-8">
+          <button onClick={() => navigate(-1)} className="text-white/60 hover:text-white transition-colors">← Back</button>
+          <button onClick={() => navigate('/')} className="text-white/60 hover:text-white transition-colors">Home 🏠</button>
+        </div>
+{/*we use form because it has a built in "Enter" key submission and better accessibility.
+ The handleLogin function will be called when the form is submitted, which will call the login function from AuthContext with the entered credentials.*/}
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div className="relative">
+            <label className="text-xs font-bold text-indigo-200 uppercase tracking-widest ml-1">Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-indigo-400/50 transition-all mt-1"
+              placeholder="Enter your admin ID"
+              required
+            />
+          </div>
+
+          <div className="relative">
+            <label className="text-xs font-bold text-indigo-200 uppercase tracking-widest ml-1">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-indigo-400/50 transition-all mt-1"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <button
+  type="submit"
+  style={{ backgroundColor: '#22c55e' }} // Emerald green for a positive action
+  //we cannot use tailwind classes for the button because we aim to use the "bg-green-500" color and it is not available in Tailwind by default,
+  //so we use inline styles for that specific color.
+  className="w-full text-white font-bold py-4 rounded-xl transition-colors shadow-lg"
+>
+  AUTHORIZE ACCESS
+</button>
+        </form>
       </div>
 
-      {/* Login Form */}
-      <form onSubmit={handleLogin} className="w-full max-w-md bg-white/10 backdrop-blur-md rounded-lg p-6 shadow-2xl">
-        <div className="mb-4">
-          <label className="block text-white font-bold mb-2">Username</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-white font-bold mb-2">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-gradient-to-r from-purple-500 to-purple-700 text-white font-bold py-2 px-4 rounded-md hover:from-purple-600 hover:to-purple-800 transition duration-300"
-        >
-          LOG IN
-        </button>
-      </form>
-
-      {/* Back Button */}
+      {/* Subtle Footer */}
       <button
-        onClick={() => navigate('/more')}
-        className="mt-6 text-white underline hover:text-gray-300"
+        className="mt-8 text-white/40 text-sm hover:text-white transition-colors"
       >
-        Back to More
+        Secure System v2.0
       </button>
     </div>
   );
