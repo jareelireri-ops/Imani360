@@ -6,6 +6,7 @@ const StaffToolsScreen = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+
   // Security Check
   if (!user) {
     return <div className="min-h-screen bg-black flex items-center justify-center text-white font-black">UNAUTHORIZED ACCESS</div>;
@@ -19,6 +20,53 @@ const StaffToolsScreen = () => {
         fontFamily: "'Montserrat', sans-serif",
       }}
     >
+<div className="w-full max-w-2xl flex justify-between items-center mb-4">
+        <button
+          onClick={() => navigate(-1)}
+          style={{
+            backgroundColor: '#06b6d4', // Cyan
+            color: 'white',
+            borderRadius: '50%',
+            width: '80px',
+            height: '80px',
+            border: '2px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+            fontSize: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#0891b2'}
+          onMouseOut={(e) => e.target.style.backgroundColor = '#06b6d4'}
+          title="Back"
+        >
+          ←
+        </button>
+        <button
+          onClick={() => navigate('/')}
+          style={{
+            backgroundColor: 'black', // Black
+            color: 'white',
+            borderRadius: '50%',
+            width: '80px',
+            height: '80px',
+            border: '2px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+            fontSize: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#333'}
+          onMouseOut={(e) => e.target.style.backgroundColor = 'black'}
+          title="Home"
+        >
+          🏠
+        </button>
+      </div>
+
       {/* Identity Header */}
       <div className="w-full max-w-2xl mb-8 text-center">
         <h1 className="text-white text-3xl font-black tracking-tighter uppercase">Staff Operations</h1>
@@ -98,6 +146,8 @@ const StaffToolsScreen = () => {
       </button>
     </div>
   );
+
 };
+
 
 export default StaffToolsScreen;
