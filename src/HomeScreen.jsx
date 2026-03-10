@@ -47,7 +47,7 @@ const HomeScreen = () => {
               position: 'relative',
             }}
           >
-            CHRISTIAN CHURCH INTERNATIONAL LIGHT SANCTUARY
+            CHRISTIAN CHURCH INTERNATIONAL LIGHT-SANCTUARY
           </div>
         </div>
       </div>
