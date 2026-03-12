@@ -19,13 +19,13 @@ const MembersConnectScreen = () => {
 
   // Mock group stats 
   const [groupStats, setGroupStats] = useState({
-    'Praise and Worship': 15,
-    'Men': 10,
-    'Women': 12,
-    'Media Team': 8,
-    'Junior Youth': 20,
-    'Senior Youth': 18,
-    'Sunday School': 25,
+    'Praise and Worship': 0,
+    'Men': 0,
+    'Women': 0,
+    'Media Team': 0,
+    'Junior Youth': 0,
+    'Senior Youth': 0,
+    'Sunday School': 0,
   });
 
   // Handle search (prefix matching for flexibility)
@@ -254,7 +254,7 @@ const MembersConnectScreen = () => {
 
       {/* Form - Styled Card */}
       <div className="w-full max-w-2xl bg-white/10 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-white/20">
-        <h3 className="text-white text-xl font-semibold mb-4 text-center">Share Your Details</h3>
+        <h3 className="text-white text-xl font-semibold mb-4 text-center">Enter Your Details</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -283,8 +283,8 @@ const MembersConnectScreen = () => {
             </div>
           </div>
           <div>
-            <label className="block text-white font-semibold mb-2">Groups (Auto-filled if joined)</label>
-            <p className="text-white/70 text-sm">Select groups you're in:</p>
+            <label className="block text-white font-semibold mb-2">Groups</label>
+            <p className="text-white/70 text-sm">Select group/groups you're in:</p>
             <div className="grid grid-cols-2 gap-2">
               {['Praise and Worship', 'Men', 'Women', 'Media Team', 'Junior Youth', 'Senior Youth', 'Sunday School'].map((group) => (
                 <label key={group} className="flex items-center space-x-2">
