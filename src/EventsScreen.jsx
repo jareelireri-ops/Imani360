@@ -120,10 +120,10 @@ const EventsScreen = () => {
         >
           ←
         </button>
-        <button
+                <button
           onClick={() => navigate('/')}
           style={{
-            backgroundColor: 'black', // Black
+            backgroundColor: 'black', 
             color: 'white',
             borderRadius: '50%',
             width: '80px',

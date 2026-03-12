@@ -286,7 +286,7 @@ const MembersConnectScreen = () => {
             <label className="block text-white font-semibold mb-2">Groups</label>
             <p className="text-white/70 text-sm">Select group/groups you're in:</p>
             <div className="grid grid-cols-2 gap-2">
-              {['Praise and Worship', 'Men', 'Women', 'Media Team', 'Junior Youth', 'Senior Youth', 'Sunday School'].map((group) => (
+              {['Praise and Worship', 'Men', 'Women', 'Junior Youth', 'Senior Youth', 'Sunday School'].map((group) => (
                 <label key={group} className="flex items-center space-x-2">
                   <input
                     type="checkbox"

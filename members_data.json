@@ -1,0 +1,58 @@
+[
+  {
+    "id": "2",
+    "name": "Juliah Wanjiru",
+    "phone_no": "0722335535",
+    "email": null,
+    "roles": "Elder",
+    "bio": null,
+    "group_in": "Women",
+    "pledge_balance": 10000,
+    "pledge_status": "No pledge",
+    "created_at": "2026-03-12 14:06:14.813577+00",
+    "is_active": true,
+    "is_verified": true
+  },
+  {
+    "id": "1",
+    "name": "David Kagwa",
+    "phone_no": "0722461386",
+    "email": null,
+    "roles": "Reverend",
+    "bio": null,
+    "group_in": "Men",
+    "pledge_balance": 0,
+    "pledge_status": "No pledge",
+    "created_at": "2026-03-12 14:02:56.308931+00",
+    "is_active": true,
+    "is_verified": true
+  },
+  {
+    "id": "3",
+    "name": "Jareel Ireri",
+    "phone_no": "0719527252",
+    "email": "jar33lireri@gmail.com",
+    "roles": "Visual Media",
+    "bio": null,
+    "group_in": "Senior Youth ",
+    "pledge_balance": 11000,
+    "pledge_status": "No pledge",
+    "created_at": "2026-03-12 14:06:14.813577+00",
+    "is_active": true,
+    "is_verified": true
+  },
+  {
+    "id": "8",
+    "name": "David Ng'anga",
+    "phone_no": "0712833345",
+    "email": null,
+    "roles": "Sound Media",
+    "bio": null,
+    "group_in": "Junior Youth",
+    "pledge_balance": 0,
+    "pledge_status": "No pledge",
+    "created_at": "2026-03-12 14:12:56.171079+00",
+    "is_active": true,
+    "is_verified": true
+  }
+]
