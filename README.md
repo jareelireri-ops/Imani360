@@ -1,5 +1,6 @@
 # Imani360
 It is an all-in-one digital platform designed to strengthen the relationship between churches and their congregations in today’s fast-paced, digital world.
+
 The app provides a centralized, secure, and user-friendly space for spiritual engagement, communication, and church administration—eliminating the need for fragmented tools such as texts, social media, or paper-based systems.
 ---
 
@@ -11,7 +12,7 @@ The app provides a centralized, secure, and user-friendly space for spiritual en
 3. Giving and Pledges
 -Members view clear instructions and channels for tithes, offerings, donations, and pledges.
 4. Communication
--Members submit prayer requests or messages anonymously or with their identity visible.
+-Members can send prayer requests directly to the Rev. , with the option of either sending it anonymously or with their identity visible. 
 5. Administration
 Church administrators manage events, announcements, and member engagement from a central platform.
 ---
@@ -19,16 +20,16 @@ Church administrators manage events, announcements, and member engagement from a
 ## Users
 -Church members seeking digital access to church services and communication
 
--Church administrators and leaders managing announcements, events, and engagement
+-Church administrators and leaders managing announcements, accounts, events, and engagement
 
 -Congregations needing a unified digital fellowship experience
 ---
 
 ## ## Benefits of the project
 -Centralized church communication in one platform
-- Improved member participation and engagement
+- Improves member participation and engagement
 - Secure and private communication channels
-- Reduced reliance on fragmented tools (texts, social media, paper)
+- Reduced reliance on (texts, social media, paper)
 - Stronger sense of fellowship and community
 
 ---
@@ -38,10 +39,14 @@ Church administrators manage events, announcements, and member engagement from a
 - Build a scalable and user-friendly digital community platform
 - Improve digital transformation in religious institutions
 
-## Technologies Used
+## Technologies Used for front-end
 - React Native
 - Tailwind CSS
 - JavaScript
+## (to be used)
+-Python
+-Postgres
+-Flask
 
 ## Setup Instructions
 1 clone the Repositorty
@@ -60,12 +65,7 @@ npm run dev
 
 ### For Church Members
 
-- Open the application in your web browser.
-- Navigate through the **Home** screen to view:
-  - Notices and announcements
-  - Church events
-- Use the **Giving** section to view payment instructions and submit tithes or offerings.
-- Submit prayer requests via the **Prayer** screen, either anonymously or with your identity visible.
+- Open the application via any gadget and access any features needed.
 
 ### For Administrators
 
@@ -76,9 +76,11 @@ npm run dev
   - Church events
   - Church communications
 
+  -(Admins wil have access to the database(postgres or sqlite
+  ))
+
 ---
 
-##  Custom Hooks Breakdown
 
 ### useAuth
 
@@ -107,9 +109,10 @@ Manages form data for prayers, giving, and messages.
 ### useClipboard
 
 **Purpose:**  
-Enables copying of giving and payment details.
+Enables a user to copy and paste the giving and payment details
 
 **Responsibilities:**
+
 - Copies text to the clipboard
 - Provides user feedback on success or failure
 
@@ -145,9 +148,10 @@ Controls step-based navigation between screens.
 
  ## Author
  This project was developed by :
- 1.Asumpta2640
- 2.jareelireri-ops
+ 1.El Roi
+ 2.Jareel
+ 3.jareelireri-ops(github)
 
 #License
 
-This Project is licensed under the MIT License
+This Project is currently licensed under the MIT License.
