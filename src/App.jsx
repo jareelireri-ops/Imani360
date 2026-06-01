@@ -1,18 +1,25 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import HomeScreen from './HomeScreen'; 
-import MoreScreen from './MoreScreen'; 
-import AdminLogin from './AdminLogin';
-import NoticesScreen from './NoticesScreen'; 
-import EventsScreen from './EventsScreen';
-import PrayersScreen from './PrayerScreen';
-import GivingScreen from './GivingScreen';
-import PreviousSermonsScreen from './PreviousSermonScreen';
-import MembersConnectScreen from './MembersConnectScreen';
-import SettingScreen from './SettingScreen';
-import StaffToolsScreen from './StaffToolsScreen'; // Ensure this matches your file name exactly
-import { AuthProvider } from './AuthContext';
-import './index.css'; 
+
+// Context
+import { AuthProvider } from './context/AuthContext';
+
+// Home Screens
+import HomeScreen from './screens/home/HomeScreen'; 
+import MoreScreen from './screens/home/MoreScreen'; 
+
+// Feature Screens
+import NoticesScreen from './screens/features/NoticesScreen'; 
+import EventsScreen from './screens/features/EventsScreen';
+import PrayersScreen from './screens/features/PrayerScreen'; // Matched your sidebar spelling
+import GivingScreen from './screens/features/GivingScreen';
+import PreviousSermonsScreen from './screens/features/PreviousSermonScreen'; // Matched your sidebar spelling
+import MembersConnectScreen from './screens/features/MembersConnectScreen';
+
+// Admin Screens
+import AdminLogin from './screens/admin/AdminLogin'; // Assuming you moved this to admin
+import SettingScreen from './screens/admin/SettingScreen'; // Found this in your admin folder
+import StaffToolsScreen from './screens/admin/StaffToolsScreen';
 
 // 1. PLACEHOLDERS FOR ADMIN TOOLS - These will be fleshed out with real functionality later
 const AdminFinances = () => <div className="min-h-screen bg-black flex items-center justify-center text-white p-20">Finance Desk Coming Soon...</div>;
