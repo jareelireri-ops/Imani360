@@ -1,268 +1,495 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { 
+  MegaphoneSimple, 
+  CalendarBlank, 
+  HandsPraying, 
+  House, 
+  CaretRight, 
+  MagnifyingGlass, 
+  ArrowLeft,
+  UsersThree,
+  Sparkle
+} from '@phosphor-icons/react';
 
-const NoticesScreen = () => {
+// ── 1. CONSTANT BRANDED HEADER COMPONENT (From image_35d4c2.jpg) ──
+const Header = () => {
   const navigate = useNavigate();
-  const [announcements, setAnnouncements] = useState([
-    // Mock data - replace with real data later (e.g., from API or Firebase)
-    { id: 1, title: 'Sunday Service Update', date: '2023-10-15', description: 'Join us for our special service this Sunday at 10 AM. We will have guest speakers and music.' },
-    { id: 2, title: 'Community Outreach', date: '2023-10-20', description: 'Volunteers needed for the food drive next week. Sign up in the foyer or contact the office.' },
-    { id: 3, title: 'Youth Group Meeting', date: '2023-10-22', description: 'Weekly youth meeting on Friday at 7 PM. All ages welcome!' },
-  ]);
-  const [isAdmin, setIsAdmin] = useState(false); // Placeholder - set to true if admin is logged in (we can add auth check later)
-  const [showForm, setShowForm] = useState(false);
-  const [newTitle, setNewTitle] = useState('');
-  const [newDescription, setNewDescription] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // Function to get current date
-  const getCurrentDate = () => new Date().toISOString().split('T')[0];
-
-  // Function to check if date is within last 14 days
-  const isWithinTwoWeeks = (dateString) => {
-    const announcementDate = new Date(dateString);
-    const twoWeeksAgo = new Date();
-    twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
-    return announcementDate >= twoWeeksAgo;
-  };
-
-  // Filtered and sorted announcements (latest first, within 2 weeks)
-  const filteredAnnouncements = announcements
-    .filter((announcement) => isWithinTwoWeeks(announcement.date))
-    .filter((announcement) =>
-      announcement.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      announcement.description.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date descending (latest first)
-
-  const handleAddAnnouncement = () => {
-    if (newTitle && newDescription) {
-      const newAnnouncement = {
-        id: announcements.length + 1,
-        title: newTitle,
-        date: getCurrentDate(),
-        description: newDescription,
-      };
-      setAnnouncements([...announcements, newAnnouncement]);
-      setNewTitle('');
-      setNewDescription('');
-      setShowForm(false);
-    }
-  };
-
-  const handleRefresh = () => {
-    // For now, just re-filter and re-sort (replace with API call later)
-    setAnnouncements([...announcements]);
-  };
-
+  
   return (
-    <div 
-      className="min-h-screen flex flex-col items-center justify-start pt-12 pb-20 px-4"
-      style={{
-        background: 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.8) 0%, rgba(37, 40, 153, 0.9) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        margin: 0,
-        fontFamily: "'Montserrat', sans-serif",
-      }}
-    >
-      {/* Header Container */}
-      <div className="w-full max-w-2xl mb-8">
-        <div
-          className="w-full relative overflow-hidden"
-          style={{
-            boxSizing: 'border-box',
-            height: '80px',
-            background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%)',
-            border: '2px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.1)',
-            borderRadius: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '0 20px',
-          }}
-        >
-          {/* Subtle animated background effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
-          <div
-            style={{
-              fontFamily: "'Crimson Text', serif",
-              fontStyle: 'normal',
-              fontWeight: '700',
-              fontSize: 'clamp(18px, 4vw, 24px)',
-              lineHeight: '1.3',
-              color: '#FFFFFF',
-              textAlign: 'center',
-              width: '100%',
-              textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-              zIndex: 1,
-              position: 'relative',
-            }}
-          >
-            CHURCH NOTICES (ANNOUNCEMENTS)
+    <header className="global-site-header">
+      <div className="header-inner">
+        {/* Exact Logo Setup from Landing Page */}
+        <div className="site-logo" onClick={() => navigate('/')}>
+          <div className="logo-text-group">
+            <h1 className="logo-main-title">CHRISTIAN CHURCH INTERNATIONAL</h1>
+            <p className="logo-sub-title">Light-Sanctuary</p>
           </div>
         </div>
-      </div>
 
-      {/* Navigation Buttons */}
-      {/* Navigation Buttons - Standardized */}
-      <div className="w-full max-w-2xl flex justify-between items-center mb-4">
-        <button
-          onClick={() => navigate(-1)}
-          style={{
-            backgroundColor: '#06b6d4', // Cyan
-            color: 'white',
-            borderRadius: '50%',
-            width: '80px',
-            height: '80px',
-            border: '2px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-            fontSize: '24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'background-color 0.3s',
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#0891b2'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#06b6d4'}
-          title="Back"
-        >
-          ←
-        </button>
-        <button
-          onClick={() => navigate('/')}
-          style={{
-            backgroundColor: 'black', // Black
-            color: 'white',
-            borderRadius: '50%',
-            width: '80px',
-            height: '80px',
-            border: '2px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-            fontSize: '24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'background-color 0.3s',
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#333'}
-          onMouseOut={(e) => e.target.style.backgroundColor = 'black'}
-          title="Home"
-        >
-          🏠
+        {/* Exact Landing Page Navigation Menu */}
+        <nav className="global-nav">
+          <span className="nav-item" onClick={() => navigate('/')}>Home</span>
+          <span className="nav-item" onClick={() => navigate('/about')}>About</span>
+          <span className="nav-item" onClick={() => navigate('/ministries')}>Ministries</span>
+          <span className="nav-item active" onClick={() => navigate('/notices')}>Notices</span>
+          <span className="nav-item" onClick={() => navigate('/events')}>Events</span>
+          <span className="nav-item" onClick={() => navigate('/contact')}>Contact</span>
+        </nav>
+
+        {/* Home Capsule from image_35d882.png */}
+        <button className="header-home-capsule" onClick={() => navigate('/')}>
+          <House size={18} weight="regular" />
         </button>
       </div>
+    </header>
+  );
+};
 
-      {/* Metallic Cross - Enhanced Glow */}
-      <div className="mb-12 relative">
-        <div
-          style={{
-            fontSize: 'clamp(36px, 8vw, 54px)',
-            color: '#ffffff',
-            textShadow: `
-              0 0 20px rgba(255, 255, 255, 0.8),
-              0 0 40px rgba(255, 215, 0, 0.6),
-              0 0 60px rgba(255, 215, 0, 0.4),
-              0 0 80px rgba(255, 215, 0, 0.2)
-            `,
-            filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.4))',
-            lineHeight: '1',
-            animation: 'glow 2s ease-in-out infinite alternate',
-          }}
-        >
-          ✝
+// ── 2. CONSTANT BREADCRUMBS COMPONENT (Corrected from image_35d882.png) ──
+const Breadcrumbs = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="global-breadcrumbs">
+      <div className="breadcrumbs-inner">
+        <span className="crumb-link" onClick={() => navigate('/')}>
+          <House size={13} style={{ marginRight: '5px', display: 'inline-block', verticalAlign: 'middle', marginTop: '-2px' }} />
+          Home
+        </span>
+        <CaretRight size={10} className="crumb-separator" />
+        <span className="crumb-current">Notices Feed</span>
+      </div>
+    </div>
+  );
+};
+
+// ── 3. MASTER CHURCH NOTICES SCREEN ──
+const NoticesScreen = () => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Unified Chronological Database (Newest / Most Recent listed first)
+  const ALL_NOTICES = [
+    {
+      id: 1,
+      title: 'CCI Website Coming Soon!',
+      text: 'Our brand-new digital home is almost ready. Track announcements, notices, and stay updated seamlessly.',
+      dateLabel: 'Last Sunday',
+      isPinned: true,
+      icon: MegaphoneSimple,
+      tag: '● CCI Website Coming Soon!'
+    },
+    {
+      id: 2,
+      title: 'Covenant Fellowship Night',
+      text: 'Support the organization and growth of our community fellowships and holy celebrations.',
+      dateLabel: 'This Week',
+      isPinned: true,
+      icon: UsersThree,
+      tag: '[ COMMUNITY ]'
+    },
+    { id: 3, title: 'Volunteers Needed', text: 'Join our welcoming and ushering ministries for upcoming services.', dateLabel: '1 Week Ago', isPinned: false, icon: UsersThree },
+    { id: 4, title: 'Youth Group Meeting', text: 'Friday youth gathering in the main sanctuary hall.', dateLabel: '2 Weeks Ago', isPinned: false, icon: CalendarBlank },
+    { id: 5, title: 'Prayer And meeting', text: 'Mid-week intercessory prayer and breaking of bread.', dateLabel: '2 Weeks Ago', isPinned: false, icon: HandsPraying },
+    { id: 6, title: 'Prayer Announcements', text: 'Important updates regarding congregation prayer networks.', dateLabel: '3 Weeks Ago', isPinned: false, icon: MegaphoneSimple },
+    { id: 7, title: 'Prayer Group Meeting', text: 'Weekly cell group covenant fellowship assemblies.', dateLabel: '4 Weeks Ago', isPinned: false, icon: HandsPraying },
+    { id: 8, title: 'Media Tech', text: 'Sound system, stream operations, and production training workshops.', dateLabel: 'Last Month', isPinned: false, icon: Sparkle, hasBadge: true, badgeText: 'Amen' },
+  ];
+
+  // Dynamic search matching utility over title and descriptions
+  const filteredNotices = ALL_NOTICES.filter(notice =>
+    notice.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    notice.text.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Split cleanly between layouts
+  const displayLatest = filteredNotices.filter(n => n.isPinned);
+  const displayArchive = filteredNotices.filter(n => !n.isPinned);
+
+  return (
+    <div className="notices-page-wrapper">
+      <style>{`
+        .notices-page-wrapper {
+          min-height: 100vh;
+          background-color: #030a1c; /* Deep landing page navy midnight shadow */
+          color: #ffffff;
+          font-family: 'Montserrat', sans-serif;
+          position: relative;
+          overflow-x: hidden;
+        }
+
+        /* ── HEADER STYLES ── */
+        .global-site-header {
+          width: 100%;
+          background: #091124;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .header-inner {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 16px 40px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .logo-text-group {
+          display: flex;
+          flex-direction: column;
+        }
+        .logo-main-title {
+          font-size: 15px;
+          font-weight: 800;
+          letter-spacing: 0.5px;
+          color: #ffffff;
+          margin: 0;
+        }
+        .logo-sub-title {
+          font-size: 12px;
+          font-style: italic;
+          color: rgba(255, 255, 255, 0.5);
+          margin: 2px 0 0 0;
+        }
+        .global-nav {
+          display: flex;
+          gap: 24px;
+        }
+        .nav-item {
+          font-size: 13px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.6);
+          cursor: pointer;
+          transition: color 0.2s;
+        }
+        .nav-item:hover, .nav-item.active {
+          color: #ffffff;
+          border-bottom: 1px solid #ffffff;
+        }
+        .header-home-capsule {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: white;
+          width: 38px;
+          height: 38px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+
+        /* ── BREADCRUMBS ── */
+        .global-breadcrumbs {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 16px 40px 0 40px;
+        }
+        .breadcrumbs-inner {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 11px;
+        }
+        .crumb-link {
+          color: rgba(255, 255, 255, 0.4);
+          cursor: pointer;
+          text-decoration: none;
+        }
+        .crumb-separator {
+          color: rgba(255, 255, 255, 0.2);
+        }
+        .crumb-current {
+          color: #38bdf8;
+          font-weight: 500;
+        }
+
+        /* ── INTERACTION UTILITIES ROW ── */
+        .notices-main-container {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 30px 40px 80px 40px;
+        }
+        .notices-action-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 40px;
+        }
+        .action-back-btn {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: white;
+          width: 44px;
+          height: 44px;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+        .master-cross-capsule {
+          width: 320px;
+          height: 44px;
+          border: 1px solid rgba(56, 189, 248, 0.25);
+          background: rgba(6, 13, 34, 0.4);
+          border-radius: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          color: #ffffff;
+        }
+        .search-input-wrapper {
+          position: relative;
+          width: 280px;
+        }
+        .search-input-field {
+          width: 100%;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 10px;
+          padding: 12px 14px 12px 38px;
+          color: white;
+          font-size: 13px;
+          outline: none;
+        }
+        .search-icon-inside {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: rgba(255,255,255,0.3);
+        }
+
+        /* ── RECTANGLE BROADCAST CARDS ── */
+        .notices-section-block {
+          margin-bottom: 40px;
+        }
+        .section-row-title {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.5);
+          margin-bottom: 24px;
+        }
+        .broadcast-flex-row {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+          gap: 24px;
+        }
+        .broadcast-card {
+          background: #0b1329;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 16px;
+          padding: 28px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          position: relative;
+        }
+        .broadcast-card.pinned-red {
+          border-color: rgba(220, 38, 38, 0.25);
+        }
+        .broadcast-meta-line {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .card-tag-red {
+          color: #ef4444;
+          font-size: 11px;
+          font-weight: 700;
+        }
+        .card-tag-blue {
+          color: #38bdf8;
+          font-size: 11px;
+          font-weight: 700;
+        }
+        .static-date-tag {
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.35);
+          background: rgba(255, 255, 255, 0.04);
+          padding: 4px 8px;
+          border-radius: 4px;
+        }
+        .broadcast-main-title {
+          font-size: 18px;
+          font-weight: 700;
+          margin: 0;
+        }
+        .broadcast-body-text {
+          font-size: 13px;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.6);
+          margin: 0;
+        }
+
+        .branded-divider-row {
+          width: 100%;
+          text-align: center;
+          opacity: 0.12;
+          letter-spacing: 8px;
+          color: #ffffff;
+          margin: 32px 0;
+        }
+
+        /* ── GRID HOVER ARCHIVES ── */
+        .archive-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+          gap: 20px;
+        }
+        .archive-item-card {
+          background: #0b1329;
+          border: 1px solid rgba(255, 255, 255, 0.04);
+          border-radius: 12px;
+          padding: 20px 24px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .archive-left-block {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+        .archive-icon-container {
+          color: #38bdf8;
+          display: flex;
+          align-items: center;
+          opacity: 0.8;
+        }
+        .archive-title {
+          font-size: 14px;
+          font-weight: 600;
+          color: #ffffff;
+        }
+        .amen-red-badge {
+          background: #dc2626;
+          color: white;
+          font-weight: 700;
+          font-size: 10px;
+          padding: 4px 10px;
+          border-radius: 6px;
+          text-transform: uppercase;
+        }
+        .bottom-tracker-footer {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 6px;
+          font-size: 11px;
+          color: rgba(255,255,255,0.3);
+          margin-top: 40px;
+        }
+        .tracker-green-dot {
+          width: 5px;
+          height: 5px;
+          background: #10b981;
+          border-radius: 50%;
+        }
+      `}</style>
+
+      {/* Persistent Cross-Page Layout Components */}
+      <Header />
+      <Breadcrumbs />
+
+      <main className="notices-main-container">
+        
+        {/* INTERACTIVE ACTIONS */}
+        <div className="notices-action-header">
+          <button className="action-back-btn" onClick={() => navigate(-1)}>
+            <ArrowLeft size={18} weight="bold" />
+          </button>
+          
+          <div className="master-cross-capsule">
+            <span>†</span>
+          </div>
+
+          <div className="search-input-wrapper">
+            <MagnifyingGlass size={16} className="search-icon-inside" />
+            <input 
+              type="text" 
+              className="search-input-field" 
+              placeholder="Search..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </div>
-        {/* Glow Animation Keyframes */}
-        <style>{`
-          @keyframes glow {
-            from {filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));}
-            to {filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));}
-          }
-        `}</style>
-      </div>
 
-      {/* Search Bar and Refresh Button */}
-      <div className="w-full max-w-2xl mb-8 flex flex-col sm:flex-row items-center gap-4">
-        <input
-          type="text"
-          placeholder="Search announcements..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-1 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/90 backdrop-blur-md"
-        />
-        <button
-          onClick={handleRefresh}
-          className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-md hover:from-blue-600 hover:to-blue-800 transition duration-300"
-        >
-          Refresh
-        </button>
-      </div>
-
-      {/* Announcements List */}
-      <div className="w-full max-w-2xl flex flex-col items-center mb-16 px-4 max-h-96 overflow-y-auto">
-        {filteredAnnouncements.length > 0 ? (
-          filteredAnnouncements.map((announcement) => (
-            <div
-              key={announcement.id}
-              className="w-full mb-4 p-4 bg-white/10 backdrop-blur-md rounded-lg shadow-lg border border-white/20"
-            >
-              <h3 className="text-white font-black text-lg mb-2">{announcement.title}</h3>
-              <p className="text-white/80 text-sm mb-2">Date: {announcement.date}</p>
-              <p className="text-white leading-relaxed">{announcement.description}</p>
-            </div>
-          ))
+        {/* CONDITION STATE LIST */}
+        {filteredNotices.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '60px 0', color: 'rgba(255,255,255,0.4)', fontSize: '14px' }}>
+            No announcements found matching "{searchQuery}"
+          </div>
         ) : (
-          <p className="text-white text-center">No announcements found.</p>
+          <>
+            {/* TIMELINE SEGMENT 1: HIGHEST CHRONOLOGICAL ROW */}
+            {displayLatest.length > 0 && (
+              <div className="notices-section-block">
+                <h2 className="section-row-title">Latest Notices (This Week)</h2>
+                <div className="broadcast-flex-row">
+                  {displayLatest.map((card) => (
+                    <div key={card.id} className={`broadcast-card ${card.isPinned ? 'pinned-red' : ''}`}>
+                      <div className="broadcast-meta-line">
+                        <span className={card.id === 1 ? 'card-tag-red' : 'card-tag-blue'}>
+                          {card.tag}
+                        </span>
+                        <span className="static-date-tag">{card.dateLabel}</span>
+                      </div>
+                      <h3 className="broadcast-main-title">{card.title}</h3>
+                      <p className="broadcast-body-text">{card.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* SEPARATOR STRING DIVISION AS PER DESIGN */}
+            <div className="branded-divider-row">
+              ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            </div>
+
+            {/* TIMELINE SEGMENT 2: HISTORICAL RUNTIME GRID */}
+            {displayArchive.length > 0 && (
+              <div className="notices-section-block">
+                <h2 className="section-row-title">Last Month's Archive</h2>
+                <div className="archive-cards-grid">
+                  {displayArchive.map((item) => {
+                    const IconComponent = item.icon;
+                    return (
+                      <div key={item.id} className="archive-item-card">
+                        <div className="archive-left-block">
+                          <div className="archive-icon-container">
+                            <IconComponent size={20} weight="regular" />
+                          </div>
+                          <span className="archive-title">{item.title}</span>
+                        </div>
+
+                        {item.hasBadge ? (
+                          <div className="amen-red-badge">{item.badgeText}</div>
+                        ) : (
+                          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>{item.dateLabel}</span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </>
         )}
-      </div>
 
-      {/* Admin Add Button */}
-      {isAdmin && (
-        <div className="w-full max-w-2xl flex justify-center mb-8">
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="bg-gradient-to-r from-purple-500 to-purple-700 text-white font-bold py-2 px-6 rounded-md hover:from-purple-600 hover:to-purple-800 transition duration-300"
-          >
-            {showForm ? 'Cancel' : 'Add Announcement'}
-          </button>
+        {/* LIVE BOTTOM RUNTIME TRACKER */}
+        <div className="bottom-tracker-footer">
+          <span className="tracker-green-dot" />
+          <span>Live Feed Updated 2 mins ago</span>
         </div>
-      )}
 
-      {/* Add Announcement Form (Admin Only) */}
-      {showForm && isAdmin && (
-        <div className="w-full max-w-2xl mb-8 p-4 bg-white/10 backdrop-blur-md rounded-lg shadow-lg border border-white/20">
-          <h4 className="text-white font-black mb-4">Add New Announcement</h4>
-          <input
-            type="text"
-            placeholder="Title"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            className="w-full mb-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <textarea
-            placeholder="Description"
-            value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
-            className="w-full mb-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="4"
-          />
-          <button
-            onClick={handleAddAnnouncement}
-            className="bg-gradient-to-r from-green-500 to-green-700 text-white font-bold py-2 px-4 rounded-md hover:from-green-600 hover:to-green-800 transition duration-300"
-          >
-            Add Announcement
-          </button>
-        </div>
-      )}
-
-      {/* Back Button */}
-      <div className="flex justify-center mt-8">
-        <button
-          onClick={() => navigate('/')}
-          className="bg-gradient-to-r from-gray-500 to-gray-700 text-white font-bold py-2 px-6 rounded-md hover:from-gray-600 hover:to-gray-800 transition duration-300"
-        >
-          Back to Home
-        </button>
-      </div>
+      </main>
     </div>
   );
 };

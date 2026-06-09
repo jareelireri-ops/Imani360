@@ -1,5 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Context
 import { AuthProvider } from './context/AuthContext';
@@ -11,17 +13,20 @@ import MoreScreen from './screens/home/MoreScreen';
 // Feature Screens
 import NoticesScreen from './screens/features/NoticesScreen'; 
 import EventsScreen from './screens/features/EventsScreen';
-import PrayersScreen from './screens/features/PrayerScreen'; // Matched your sidebar spelling
+import PrayersScreen from './screens/features/PrayerScreen'; 
 import GivingScreen from './screens/features/GivingScreen';
-import PreviousSermonsScreen from './screens/features/PreviousSermonScreen'; // Matched your sidebar spelling
+import PreviousSermonsScreen from './screens/features/PreviousSermonScreen'; 
 import MembersConnectScreen from './screens/features/MembersConnectScreen';
 
 // Admin Screens
-import AdminLogin from './screens/admin/AdminLogin'; // Assuming you moved this to admin
-import SettingScreen from './screens/admin/SettingScreen'; // Found this in your admin folder
+import AdminLogin from './screens/admin/AdminLogin'; 
+import SettingScreen from './screens/admin/SettingScreen'; 
 import StaffToolsScreen from './screens/admin/StaffToolsScreen';
 
-// 1. PLACEHOLDERS FOR ADMIN TOOLS - These will be fleshed out with real functionality later
+// Register GSAP plugins globally once at app initialization
+gsap.registerPlugin(ScrollTrigger);
+
+// PLACEHOLDERS FOR ADMIN TOOLS
 const AdminFinances = () => <div className="min-h-screen bg-black flex items-center justify-center text-white p-20">Finance Desk Coming Soon...</div>;
 const AdminPrayers = () => <div className="min-h-screen bg-black flex items-center justify-center text-white p-20">Prayer Management Coming Soon...</div>;
 const AdminAnnouncements = () => <div className="min-h-screen bg-black flex items-center justify-center text-white p-20">Announcements Manager Coming Soon...</div>;
