@@ -426,7 +426,7 @@ const HomeScreen = () => {
               <span className="row-tag animate-text">Members Connect</span>
               <h2 className="row-title animate-text">Find Your Community. Hebrews 10:24</h2>
               <p className="row-description animate-text">
-                We are not meant to walk alone. Dive deeper into fellowship groups and connect directly with other covenant members to grow your faith journey together.
+                We are not meant to walk alone. Dive into your preferred group, connect with other members and participate in church activities as we grow our faith together.
               </p>
               <button className="row-btn animate-text" onClick={() => navigate('/members-connect')}>
                 Join a Group <CaretRight size={16} weight="bold" />
@@ -459,7 +459,7 @@ const HomeScreen = () => {
             </div>
             <div className="image-container animate-image">
               <img 
-                src={`${baseUrl}church-images/photo1.JPG`} 
+                src={`${baseUrl}church-images/photo1.jpg`} 
                 alt="Archive of previous church message streams" 
                 className="row-img" 
               />

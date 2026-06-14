@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PlayCircle, Radio, Sparkle } from '@phosphor-icons/react';
 
-// Exact uppercase '.JPG' matching your project directory sidebar
+
 const SLIDES = [
   `${import.meta.env.BASE_URL}church-images/logo.jpg`, // Logo is now the main/first picture
-  `${import.meta.env.BASE_URL}church-images/photo1.JPG`,
-  `${import.meta.env.BASE_URL}church-images/photo2.JPG`,
-  `${import.meta.env.BASE_URL}church-images/photo3.JPG`,
-  `${import.meta.env.BASE_URL}church-images/photo4.JPG`,
-  `${import.meta.env.BASE_URL}church-images/photo5.JPG`,
+  `${import.meta.env.BASE_URL}church-images/photo1.jpg`,
+  `${import.meta.env.BASE_URL}church-images/photo2.jpg`,
+  `${import.meta.env.BASE_URL}church-images/photo3.jpg`,
+  `${import.meta.env.BASE_URL}church-images/photo4.jpg`,
+  `${import.meta.env.BASE_URL}church-images/photo5.jpg`,
 ];
 
 const HeroSlider = () => {
